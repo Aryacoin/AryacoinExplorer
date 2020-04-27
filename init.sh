@@ -74,6 +74,10 @@ envsubst '$MONGO_DB_DATABASE $MONGO_DB_USERNAME $MONGO_DB_PASSWORD $RPC_USER $RP
 
 envsubst '$RPC_USER $RPC_PASSWORD' < ./aryacoin/aryacoin.conf.example > ./aryacoin/aryacoin.conf
 chown 1000:1000 ./aryacoin/aryacoin.conf
+
+mkdir -p data/aryacoin
+chown -R 1000:1000 data/aryacoin
+
 envsubst '$MONGO_DB_DATABASE $MONGO_DB_USERNAME $MONGO_DB_PASSWORD $RPC_USER $RPC_PASSWORD' < ./explorer/src/settings.json.template > ./explorer/src/settings.json
 
 print_style "Run containers?\n" "error"
