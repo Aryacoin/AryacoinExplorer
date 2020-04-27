@@ -1,0 +1,16 @@
+testnet=0
+
+rpcuser=${RPC_USER}
+rpcpassword=${RPC_PASSWORD}
+
+rpcallowip=0.0.0.0/0
+rpcport=8332
+
+gen=0
+
+keypool=100
+
+paytxfee=0.00100000
+
+staking=0
+txindex=1
