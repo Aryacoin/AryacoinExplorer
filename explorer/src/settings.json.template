@@ -1,0 +1,104 @@
+{
+  "title": "Aryacoin Explorer",
+  "address": "127.0.0.1:3001",
+  "coin": "Aryacoin",
+  "symbol": "AYA",
+  "logo": "/images/logo.png",
+  "favicon": "public/favicon.ico",
+  "theme": "Flatly",
+  "port" : 3001,
+
+  "dbsettings": {
+    "user": "${MONGO_DB_USERNAME}",
+    "password": "${MONGO_DB_PASSWORD}",
+    "database": "${MONGO_DB_DATABASE}",
+    "address": "mongo",
+    "port": 27017
+  },
+
+  "update_timeout": 10,
+  "check_timeout": 250,
+  "block_parallel_tasks": 1,
+
+  "use_rpc": true,
+
+  "wallet": {
+    "host": "aryacoin",
+    "port": 8332,
+    "username": "${RPC_USER}",
+    "password": "${RPC_PASSWORD}"
+  },
+
+  "confirmations": 35,
+
+  "locale": "locale/en.json",
+
+  "display": {
+    "api": true,
+    "markets": false,
+    "richlist": false,
+    "twitter": false,
+    "facebook": false,
+    "googleplus": false,
+    "youtube": false,
+    "search": true,
+    "movement": true,
+    "network": false
+  },
+
+  "index": {
+    "show_hashrate": true,
+    "show_market_cap": false,
+    "show_market_cap_over_price": false,
+    "difficulty": "POS",
+    "last_txs": 100,
+    "txs_per_page": 10
+  },
+
+  "api": {
+    "blockindex": 1337,
+    "blockhash": "61920d5e33693a67f54190a01728948b0bfeedc0b8ffd12d17f7b372b2e89b02",
+    "txhash": "1e7050e18a67acc72dbba2a9b99193b983c8b90253e1b233b4a67c8b5f16467a",
+    "address": "AGdaCKqdfM47rcvsLRznkoXp5fFNNAbzc2"
+  },
+
+  "markets": {
+    "coin": "JBS",
+    "exchange": "BTC",
+    "enabled": ["bittrex"],
+    "cryptopia_id": "1658",
+    "ccex_key" : "Get-Your-Own-Key",
+    "default": "bittrex"
+  },
+
+  "richlist": {
+    "distribution": false,
+    "received": true,
+    "balance": true
+  },
+
+  "movement": {
+    "min_amount": 100,
+    "low_flag": 1000,
+    "high_flag": 5000
+  },
+
+  "twitter": "",
+  "facebook": "",
+  "googleplus": "",
+  "youtube": "",
+
+  "genesis_tx": "fc9e6bbc099404e51716efa24c3c8c92033863c6193cf267603afee346eb1c0e",
+  "genesis_block": "e0b8c3cf6ff20faa80ef20a75998a5cfcfa4db01189c24ad9c8783fb66b841ff",
+
+  "heavy": false,
+  "lock_during_index": false,
+  "txcount": 100,
+  "txcount_per_page": 50,
+  "show_sent_received": true,
+
+  "supply": "BALANCES",
+  "nethash": "getnetworkhashps",
+  "nethash_units": "M",
+  "labels": {}
+}

@@ -1,0 +1,122 @@
+extends layout
+
+block content
+  - var time = format_unixtime(tx.timestamp)
+
+  .col-md-12
+    .ObjectInfo
+      .ObjectInfo__header
+        strong.ObjectInfo__title
+          span.ObjectInfo__titleLabel #{settings.symbol} txid:&nbsp;
+          | #{tx.txid}
+        form.ObjectInfo__search.hidden-xs(method='post', action='/search')
+          label.ObjectInfo__searchIcon.glyphicon.glyphicon-search(for="object-search")
+          input.ObjectInfo__searchInput.form-control(type='text', autocomplete='off', name='search', id="object-search", placeholder=settings.locale.object_search_placeholder)
+
+      .ObjectInfo__details
+        table.table.summary-table
+          thead
+            tr
+              th #{settings.locale.confirmations}
+              th.hidden-xs #{settings.locale.tx_block_hash}
+              th #{settings.locale.timestamp}
+              th
+          tbody
+            -
+              var confirms = (blockcount - tx.blockindex);
+              var txStatus = confirms >= confirmations
+                      ? "success"
+                      : confirms < (confirmations / 2)
+                              ? "danger"
+                              : "warning";
+              var splittedDate = time.split(" ");
+              var date = splittedDate.slice(0, 3).join(" ");
+              var time = splittedDate.slice(3).join(" ");
+
+            tr(class=txStatus)
+              td #{confirms}
+              td.hidden-xs
+                a(href='/block/' + tx.blockhash) #{tx.blockhash}
+              td.date
+                span #{date}&nbsp;
+                | #{time}
+              td.view_tx
+                a.ObjectInfo__apiLink(href='/block/' + tx.blockhash)
+                  svg(width='20' height='14' viewbox='0 0 20 14' fill='none' xmlns='http://www.w3.org/2000/svg')
+                    path(d='M10.0002 4.09094C8.49555 4.09094 7.27295 5.31354 7.27295 6.81823C7.27295 8.32293 8.49555 9.54553 10.0002 9.54553C11.505 9.54553 12.7275 8.32293 12.7275 6.81823C12.7275 5.31354 11.5045 4.09094 10.0002 4.09094Z' fill='#383B3D')
+                    path(d='M10.0002 0C5.45458 0 1.57288 2.82744 0 6.81823C1.57288 10.809 5.45458 13.6365 10.0002 13.6365C14.5501 13.6365 18.4275 10.809 20.0004 6.81823C18.4275 2.82744 14.5501 0 10.0002 0ZM10.0002 11.3639C7.4911 11.3639 5.45458 9.32734 5.45458 6.81823C5.45458 4.30912 7.4911 2.2726 10.0002 2.2726C12.5093 2.2726 14.5454 4.30912 14.5454 6.81823C14.5454 9.32734 12.5093 11.3639 10.0002 11.3639Z' fill='#383B3D')
+
+  .col-md-12
+    .row
+      .col-md-6
+        .ObjectInfo
+          .ObjectInfo__header
+            strong.ObjectInfo__title
+              | #{settings.locale.tx_contributors}
+
+          .ObjectInfo__details
+            table.table.summary-table.table-striped
+              thead
+                tr
+                  th #{settings.locale.tx_address}
+                  if (tx.vin.length > 0 && tx.vin[0].addresses != 'coinbase')
+                    th.hidden-xs #{settings.locale.mkt_amount} (#{settings.symbol})
+              tbody
+                if tx.vin.length > 0
+                  each r in tx.vin
+                    if r.addresses == 'coinbase'
+                      tr.info(style='text-align:center')
+                        td #{settings.locale.new_coins}
+                    else
+                      - var ramount = (r.amount / 100000000).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+                      - var ramountParts = ramount.split('.')
+                      tr
+                        td
+                          a.loading(href='/address/' + r.addresses)
+                            =r.addresses
+                        td.danger.hidden-xs #{ramountParts[0]}.
+                          span.decimal #{ramountParts[1]}
+                      tr.hidden-lg.hidden-md
+                        td.danger #{ramountParts[0]}.
+                          span.decimal #{ramountParts[1]} #{settings.symbol}
+                else
+                  tr.info(style='text-align:center')
+                    td #{settings.locale.proof_of_stake}
+      .col-md-6
+        .ObjectInfo
+          .ObjectInfo__header
+            strong.ObjectInfo__title
+              | #{settings.locale.tx_recipients}
+
+          .ObjectInfo__details
+            table.table.summary-table.table-striped
+              thead
+                tr
+                  th #{settings.locale.tx_address}
+                  th.hidden-xs #{settings.locale.mkt_amount} (#{settings.symbol})
+              tbody
+                each r in tx.vout
+                  if tx.vout.length > 0
+                    - var ramount = (r.amount / 100000000).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+                    - var ramountParts = ramount.split('.')
+                    tr
+                      td
+                        a.loading(href='/address/' + r.addresses)
+                          =r.addresses
+                      td.success.hidden-xs  #{ramountParts[0]}.
+                        span.decimal #{ramountParts[1]}
+                    tr.hidden-lg.hidden-md.hidden-sm
+                      td.success #{ramountParts[0]}.
+                        span.decimal #{ramountParts[1]} #{settings.symbol}
+                  else
+                    - var ramount = (r.amount / 100000000).toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true})
+                    - var ramountParts = ramount.split('.')
+                    tr
+                      td
+                        a.loading(href='/address/' + r.addresses)
+                          =r.addresses
+                      td.success.hidden-xs  #{ramountParts[0]}.
+                        span.decimal #{ramountParts[1]}
+                    tr.hidden-lg.hidden-md
+                      td.success #{ramountParts[0]}.
+                        span.decimal #{ramountParts[1]} #{settings.symbol}

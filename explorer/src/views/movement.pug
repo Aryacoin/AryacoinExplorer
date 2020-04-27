@@ -1,0 +1,152 @@
+extends layout
+
+block content
+  script.
+    var setting_maxTxCount = parseInt("#{settings.index.last_txs}");
+    var setting_txPerPage = parseInt("#{settings.index.txs_per_page}");
+    var lengthMenuOpts = [];
+    var lengthMenuOptsAdd = [ 10, 25, 50, 75, 100, 250, 500, 1000 ];
+    for (i=0; i < lengthMenuOptsAdd.length; i++) {
+      if (setting_maxTxCount >= lengthMenuOptsAdd[i]) {
+        lengthMenuOpts.push(lengthMenuOptsAdd[i]);
+      }
+    }
+    if (setting_maxTxCount < setting_txPerPage) {
+      var displayLengthMax = setting_maxTxCount;
+    } else {
+      var displayLengthMax = setting_txPerPage;
+    }
+    var rplot;
+    var colors = [ "#0071bc" ];
+    $(document).ready(function(){
+      function format_unixtime(unixtime) {
+        var a = new Date(unixtime*1000);  
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        var year = a.getFullYear();
+        var month = months[a.getMonth()];
+        var date = a.getDate();
+        var hour = a.getHours();
+        var min = a.getMinutes();
+        var sec = a.getSeconds();
+        var suffix = 'th'
+        if (date == 1 || date == 21 || date == 31)
+          suffix = 'st';
+        if (date == 2 || date == 22 || date == 32)
+          suffix = 'nd';
+        if (date == 3 || date == 23)
+          suffix = 'rd';
+        if (hour < 10)
+          hour = '0' + hour;
+        if (min < 10)
+          min = '0' + min;
+        if (sec < 10)
+          sec = '0' + sec;
+        var time = date + suffix + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;   
+        return time;
+      }
+      var rtable = $('#alerts-table').dataTable( {  
+        autoWidth: false,      
+        searching: false,
+        ordering: false,
+        //responsive: true,
+        lengthChange: false,
+        processing: true,
+        serverSide: true,
+        iDisplayLength: displayLengthMax,
+        lengthMenu: lengthMenuOpts,
+        //processing: true,
+        ajax: '/ext/getlasttxsajax/#{min_amount}',
+        rowCallback: function(row, data, index) {
+          var blockindex = data[0]; //variables for better readability
+          var blockhash = data[1]; //variables for better readability
+          var txhash = data[2]; //variables for better readability
+          var outputs = data[3]; //variables for better readability
+          var amount = (data[4] / 100000000); //variables for better readability
+          var amountParts = amount.toLocaleString('en',{'minimumFractionDigits':2,'maximumFractionDigits':8,'useGrouping':true}).split('.');
+          var amountStr = amountParts[0] + '.<span class="decimal">' + amountParts[1] + '</span>';
+          var timestamp = data[5]; //variables for better readability
+          var splittedDate = timestamp.split (" ");
+          var date = splittedDate.slice (0, 4); //variables for better readability
+          var time = splittedDate.slice (4); //variables for better readability
+          if (amount > '#{flagb}') {
+            var total = "<label class='label label-danger'>" + amountStr + "</label>";
+          } else if (amount > '#{flaga}') {
+            var total = "<label class='label label-warning'>" + amountStr + "</label>";
+          } else {
+            var total = "<label class='label label-success'>" + amountStr + "</label>";
+          }
+          $("td:eq(0)", row).html(`<span class="TxTable__date">${date.join(" ")}</span>&nbsp;${time.join(" ")}`);
+          $("td:eq(1)", row).html('<a href="/tx/' + txhash + '">' + txhash + '</a>');
+          $("td:eq(2)", row).html(total);        
+        },
+      });
+
+      const toFirst = $ (".TxTableActions__toFirst");
+      const toLast = $ (".TxTableActions__toLast");
+
+      toLast.before ($ (".dataTables_paginate"))
+
+      $ (".TxTable + .row").remove ();
+
+      const rDataTable = rtable.DataTable ();
+
+      toFirst.on ("click", () => {
+        rDataTable.page ("first").draw (false);
+      })
+
+      toLast.on ("click", () => {
+        rDataTable.page ("last").draw (false);
+      })
+
+      rDataTable.on ("page", () => {
+        var info = rtable.DataTable ().page.info ();
+
+        if (info.page === 0) {
+          toFirst.addClass ("disabled");
+        } else {
+          toFirst.removeClass ("disabled");
+        }
+
+        if (info.page === info.pages - 1) {
+          toLast.addClass ("disabled");
+        } else {
+          toLast.removeClass ("disabled");
+        }
+      })
+              .on ("length", () => {
+                toFirst.addClass ("disabled");
+                toLast.removeClass ("disabled");
+              })
+
+      $ (".TxTableActions__changeLength").on ('input', function () {
+        const val = $ (this).find ("option:selected").val ();
+
+        rtable.DataTable ().page.len (val).draw ();
+      });
+
+      setInterval( function () {
+        rtable.api().ajax.reload(null, false);
+      }, 45000 );
+    });
+
+  .col-md-12
+    .Transactions
+
+      table#alerts-table.table.table-striped.TxTable
+        thead
+          tr
+            th Timestamp
+            th.hidden-xs Txid
+            th Amount
+        tbody
+
+    .TxTableActions
+      span.TxTableActions__toFirst.disabled.hidden-sm.hidden-xs To the First page
+      .TxTableActions__changeLength.hidden-sm.hidden-xs
+        | Showing
+        select.form-control
+          each val in [ 10, 25, 50, 75, 100, 250, 500, 1000 ]
+            option= val
+        | entries
+
+      span.TxTableActions__toLast.hidden-sm.hidden-xs To the Last page

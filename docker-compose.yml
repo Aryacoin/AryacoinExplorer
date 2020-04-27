@@ -1,0 +1,45 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  aryacoin:
+    build: aryacoin
+    restart: always
+    volumes:
+      - ./data/aryacoin:/home/aryacoin/.aryacoin
+    ports:
+      - "127.0.0.1:8332:8332"
+    networks:
+      - backend
+
+  mongo:
+    build: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_DATABASE}
+      DATABASE_USERNAME: ${MONGO_DB_USERNAME}
+      DATABASE_PASSWORD: ${MONGO_DB_PASSWORD}
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ./data/mongo:/data/db
+    networks:
+      - backend
+
+  explorer:
+    build: explorer
+    restart: always
+    volumes:
+      - ./explorer/src:/explorer
+    ports:
+      - "${LISTEN_HOST}:3001"
+    networks:
+      - backend
+    depends_on:
+      - mongo
+      - aryacoin

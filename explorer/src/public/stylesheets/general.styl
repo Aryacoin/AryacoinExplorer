@@ -1,0 +1,346 @@
+//Sizes
+$w-large-desktop = 1440px
+$w-desktop = 992px
+$w-tablet = 768px
+$w-mobile = 414px
+
+bp($point)
+  if $point == s
+    @media (min-width: $w-mobile)
+      {block}
+  else if $point == m
+    @media (min-width: $w-tablet)
+      {block}
+  else if $point == l
+    @media (min-width: $w-desktop)
+      {block}
+  else if $point == xl
+    @media (min-width: $w-large-desktop)
+      {block}
+  else if $point
+    // allows custom breakpoints
+    @media (min-width: $point)
+      {block}
+
+.navbar-default
+  background-color #fff
+  .navbar-nav
+    & > li
+      & > a
+        color #1D2123
+        font-size 16px
+        padding 29px 40px
+
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus
+  color #F05119
+  background-color #fff
+
+.navbar-default .navbar-toggle .icon-bar
+  background-color: #F05119;
+
+.table td
+  word-break: break-all;
+
+.Layout
+  &__logo
+    position absolute
+    left 30px
+    top 0
+    display flex
+    align-items center
+    font-weight 300
+    font-size 24px
+    color #EFA22F !important
+    text-transform uppercase
+
+    +bp(m)
+      top 10px
+
+    +bp(l)
+      left: 100px
+
+  &__symbolIcon
+    margin-right 2rem
+
+  &__brand
+    font-weight bold
+    margin-right 1rem
+
+  &__navigation#navbar-collapse
+    justify-content flex-end
+
+    +bp(m)
+      display flex !important
+
+    +bp(xl)
+      justify-content center
+
+    &.in
+      background-color: #f1f1f1;
+
+  &__content
+    padding 30px 0
+
+.Statistics
+  display flex
+  align-items center
+  justify-content space-around
+  margin-bottom 30px
+  padding 25px 40px 0
+  background-color #fff
+
+  &__block
+    display flex
+    flex-direction column
+    margin-bottom 23px
+
+  &__label
+    font-size 16px
+    color #8D9094
+
+  &__value
+    font-weight: bold;
+    font-size: 24px;
+    color: #1D2123;
+
+
+.Transactions
+  background-color: #fff;
+
+  &__header
+    position: relative;
+    padding 20px 40px
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    align-items center
+    border-bottom 1px solid #F1F2F3;
+
+  &__title
+    font-weight: 300;
+    font-size: 24px;
+    color: #383B3D;
+
+  &__connections
+    font-size: 14px;
+    color: #8D9094;
+
+  &__search
+    order: 1;
+    position: static;
+    transform: none;
+    align-self: center;
+    flex-grow: 1;
+    margin-top: 1rem;
+    flex-basis 100%
+
+    display flex
+    border-radius: 2px;
+    overflow hidden
+
+    +bp(l)
+      flex-basis auto
+      flex-grow auto
+      margin: 0
+      position: absolute;
+      left 50%
+      top 50%
+      transform translate(-50%, -50%)
+      width 38vw
+
+    input
+      flex-grow 1
+      margin 0 !important
+      border: 1px solid #A8ABAE;
+      border-radius 0
+      border-right none
+
+      &:placeholder
+        color: #A8ABAE;
+
+    button
+      outline: none !important
+      font-size: 14px;
+      border-radius 0;
+
+  &__apiLink
+    &:hover path
+      fill #F05119
+
+    path
+      transition fill .3s
+      fill #383B3D
+
+.TxTable
+  table&
+    margin-top 1rem !important
+    margin-bottom: 0 !important;
+
+  a
+    color: #F05119
+
+  &__cell, td, th
+    text-align left
+    padding 15px 30px !important
+    color: #1D2123
+    font-weight 400
+
+  &__date
+    color #8D9094
+    margin-right: 5px;
+
+
+.TxTableActions
+  display flex
+  justify-content space-between
+  align-items center
+  padding 2rem 3rem
+  background-color: #F0F1F2
+
+  &__toFirst,
+  &__toLast
+    cursor pointer
+    transition: color .3s
+
+    &.disabled
+      color: #1D2123;
+      opacity: 0.3;
+      cursor not-allowed
+
+    &:not(.disabled):hover
+      color: #F05119
+
+  &__changeLength
+    display flex
+    align-items center
+
+    select
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      margin 0 10px
+      border: 1px solid #A8ABAE;
+      border-radius: 2px;
+
+
+  .div.dataTables_paginate
+    display flex
+
+  .pagination
+    margin 0 !important
+    > li
+      &.disabled > a
+        background-color: transparent;
+        color: #1D2123;
+        opacity: 0.3;
+
+      &.active > a
+        background-color: #E1E3E6;
+        color: #1D2123;
+
+      &:not(.disabled):not(.active) > a:hover
+        background-color: rgba(0, 0, 0, .05)
+
+      > a
+        background-color: transparent;
+        color: #1D2123
+        transition: background-color .3s;
+        cursor pointer
+
+.ObjectInfo
+  margin-top: 2rem;
+  background-color: #fff;
+
+  &__header
+    padding 25px 40px
+    display flex
+    justify-content space-between
+    align-items center
+    flex-wrap wrap
+    border-bottom: 1px solid #F1F2F3;
+
+  &__title
+    word-break: break-all;
+    font-size: 16px;
+    color: #1D2123;
+    flex-basis: 50%;
+
+    +bp(l)
+      flex-basis: auto
+
+    &Label
+      color: #A8ABAE;
+
+  &__search
+    position: relative;
+    padding 0
+    margin 0
+    width auto
+    height: auto;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #F7F7F7;
+    cursor: text
+
+    &Icon
+      cursor: text
+      position: absolute;
+      left 15px
+      top 50%
+      margin 0
+      color #8D9094
+      transform translateY(-50%)
+
+    &Input
+      padding: 12px 5px 12px 40px;
+      border: none
+      background: none;
+      outline: none !important
+      width: 0;
+      transition width .5s ease
+
+      &::placeholder
+        transition opacity .3s .2s ease
+        opacity 0
+
+      &:focus
+        padding: 12px 20px 12px 40px;
+        width 500px
+
+        &::placeholder
+          opacity: 1
+
+  &__details
+    margin-bottom: 3rem;
+    td, th
+      @extend .TxTable__cell
+
+    td
+      color #fff
+
+    td.date span
+      opacity: .6;
+
+  &__apiLink
+    path
+      fill #fff
+
+.Genesis
+  border-radius 0
+  font-weight 400
+  font-size 24px
+
+.Address
+  &__qr
+    width: 100%;
+
+.Charts
+  padding 2rem
+  background-color: #fff;
+  margin-bottom 3rem

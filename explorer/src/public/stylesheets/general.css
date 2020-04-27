@@ -1,0 +1,328 @@
+.navbar-default {
+  background-color: #fff;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #1d2123;
+  font-size: 16px;
+  padding: 29px 40px;
+}
+.navbar-default .navbar-nav>li>a:hover,
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>.active>a,
+.navbar-default .navbar-nav>.active>a:hover,
+.navbar-default .navbar-nav>.active>a:focus {
+  color: #f05119;
+  background-color: #fff;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #f05119;
+}
+.table td {
+  word-break: break-all;
+}
+.Layout__logo {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  font-size: 24px;
+  color: #efa22f !important;
+  text-transform: uppercase;
+}
+@media (min-width: 768px) {
+  .Layout__logo {
+    top: 10px;
+  }
+}
+@media (min-width: 992px) {
+  .Layout__logo {
+    left: 100px;
+  }
+}
+.Layout__symbolIcon {
+  margin-right: 2rem;
+}
+.Layout__brand {
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.Layout__navigation#navbar-collapse {
+  justify-content: flex-end;
+}
+@media (min-width: 768px) {
+  .Layout__navigation#navbar-collapse {
+    display: flex !important;
+  }
+}
+@media (min-width: 1440px) {
+  .Layout__navigation#navbar-collapse {
+    justify-content: center;
+  }
+}
+.Layout__navigation#navbar-collapse.in {
+  background-color: #f1f1f1;
+}
+.Layout__content {
+  padding: 30px 0;
+}
+.Statistics {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 30px;
+  padding: 25px 40px 0;
+  background-color: #fff;
+}
+.Statistics__block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 23px;
+}
+.Statistics__label {
+  font-size: 16px;
+  color: #8d9094;
+}
+.Statistics__value {
+  font-weight: bold;
+  font-size: 24px;
+  color: #1d2123;
+}
+.Transactions {
+  background-color: #fff;
+}
+.Transactions__header {
+  position: relative;
+  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f2f3;
+}
+.Transactions__title {
+  font-weight: 300;
+  font-size: 24px;
+  color: #383b3d;
+}
+.Transactions__connections {
+  font-size: 14px;
+  color: #8d9094;
+}
+.Transactions__search {
+  order: 1;
+  position: static;
+  transform: none;
+  align-self: center;
+  flex-grow: 1;
+  margin-top: 1rem;
+  flex-basis: 100%;
+  display: flex;
+  border-radius: 2px;
+  overflow: hidden;
+}
+@media (min-width: 992px) {
+  .Transactions__search {
+    flex-basis: auto;
+    flex-grow: auto;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 38vw;
+  }
+}
+.Transactions__search input {
+  flex-grow: 1;
+  margin: 0 !important;
+  border: 1px solid #a8abae;
+  border-radius: 0;
+  border-right: none;
+}
+.Transactions__search input:placeholder {
+  color: #a8abae;
+}
+.Transactions__search button {
+  outline: none !important;
+  font-size: 14px;
+  border-radius: 0;
+}
+.Transactions__apiLink:hover path {
+  fill: #f05119;
+}
+.Transactions__apiLink path {
+  transition: fill 0.3s;
+  fill: #383b3d;
+}
+table.TxTable {
+  margin-top: 1rem !important;
+  margin-bottom: 0 !important;
+}
+.TxTable a {
+  color: #f05119;
+}
+.TxTable__cell,
+.TxTable td,
+.TxTable th,
+.ObjectInfo__details td,
+.ObjectInfo__details th {
+  text-align: left;
+  padding: 15px 30px !important;
+  color: #1d2123;
+  font-weight: 400;
+}
+.TxTable__date {
+  color: #8d9094;
+  margin-right: 5px;
+}
+.TxTableActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  background-color: #f0f1f2;
+}
+.TxTableActions__toFirst,
+.TxTableActions__toLast {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.TxTableActions__toFirst.disabled,
+.TxTableActions__toLast.disabled {
+  color: #1d2123;
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.TxTableActions__toFirst:not(.disabled):hover,
+.TxTableActions__toLast:not(.disabled):hover {
+  color: #f05119;
+}
+.TxTableActions__changeLength {
+  display: flex;
+  align-items: center;
+}
+.TxTableActions__changeLength select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0 10px;
+  border: 1px solid #a8abae;
+  border-radius: 2px;
+}
+.TxTableActions .div.dataTables_paginate {
+  display: flex;
+}
+.TxTableActions .pagination {
+  margin: 0 !important;
+}
+.TxTableActions .pagination > li.disabled > a {
+  background-color: transparent;
+  color: #1d2123;
+  opacity: 0.3;
+}
+.TxTableActions .pagination > li.active > a {
+  background-color: #e1e3e6;
+  color: #1d2123;
+}
+.TxTableActions .pagination > li:not(.disabled):not(.active) > a:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+.TxTableActions .pagination > li > a {
+  background-color: transparent;
+  color: #1d2123;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+.ObjectInfo {
+  margin-top: 2rem;
+  background-color: #fff;
+}
+.ObjectInfo__header {
+  padding: 25px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #f1f2f3;
+}
+.ObjectInfo__title {
+  word-break: break-all;
+  font-size: 16px;
+  color: #1d2123;
+  flex-basis: 50%;
+}
+@media (min-width: 992px) {
+  .ObjectInfo__title {
+    flex-basis: auto;
+  }
+}
+.ObjectInfo__titleLabel {
+  color: #a8abae;
+}
+.ObjectInfo__search {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #f7f7f7;
+  cursor: text;
+}
+.ObjectInfo__searchIcon {
+  cursor: text;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  margin: 0;
+  color: #8d9094;
+  transform: translateY(-50%);
+}
+.ObjectInfo__searchInput {
+  padding: 12px 5px 12px 40px;
+  border: none;
+  background: none;
+  outline: none !important;
+  width: 0;
+  transition: width 0.5s ease;
+}
+.ObjectInfo__searchInput::placeholder {
+  transition: opacity 0.3s 0.2s ease;
+  opacity: 0;
+}
+.ObjectInfo__searchInput:focus {
+  padding: 12px 20px 12px 40px;
+  width: 500px;
+}
+.ObjectInfo__searchInput:focus::placeholder {
+  opacity: 1;
+}
+.ObjectInfo__details {
+  margin-bottom: 3rem;
+}
+.ObjectInfo__details td {
+  color: #fff;
+}
+.ObjectInfo__details td.date span {
+  opacity: 0.6;
+}
+.ObjectInfo__apiLink path {
+  fill: #fff;
+}
+.Genesis {
+  border-radius: 0;
+  font-weight: 400;
+  font-size: 24px;
+}
+.Address__qr {
+  width: 100%;
+}
+.Charts {
+  padding: 2rem;
+  background-color: #fff;
+  margin-bottom: 3rem;
+}
