@@ -10,8 +10,6 @@ services:
     restart: always
     volumes:
       - ./data/aryacoin:/home/aryacoin/.aryacoin
-    ports:
-      - "127.0.0.1:8332:8332"
     networks:
       - backend
 
@@ -24,8 +22,6 @@ services:
       MONGO_INITDB_DATABASE: ${MONGO_DB_DATABASE}
       DATABASE_USERNAME: ${MONGO_DB_USERNAME}
       DATABASE_PASSWORD: ${MONGO_DB_PASSWORD}
-    ports:
-      - "127.0.0.1:27017:27017"
     volumes:
       - ./data/mongo:/data/db
     networks:
