@@ -73,6 +73,7 @@ export RPC_PASSWORD
 envsubst '$MONGO_DB_DATABASE $MONGO_DB_USERNAME $MONGO_DB_PASSWORD $RPC_USER $RPC_PASSWORD $MONGO_DB_ROOT_PASSWORD $MONGO_DB_ROOT_USERNAME' < ./.env.example > ./.env
 
 envsubst '$RPC_USER $RPC_PASSWORD' < ./aryacoin/aryacoin.conf.example > ./aryacoin/aryacoin.conf
+chown 1000:1000 ./aryacoin/aryacoin.conf
 envsubst '$MONGO_DB_DATABASE $MONGO_DB_USERNAME $MONGO_DB_PASSWORD $RPC_USER $RPC_PASSWORD' < ./explorer/src/settings.json.template > ./explorer/src/settings.json
 
 print_style "Run containers?\n" "error"
