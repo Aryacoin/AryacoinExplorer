@@ -18,16 +18,16 @@ RUN apt-get -y install \
     libboost-all-dev \
     libminiupnpc-dev \
     libevent-dev \
-    libzmq3-dev
+    libzmq3-dev \
+    git
 
 WORKDIR /tmp
 
-RUN wget https://github.com/sillyghost/AYAv2/archive/AYAv2.tar.gz
-RUN tar -xvzf AYAv2.tar.gz && rm AYAv2.tar.gz
+RUN git clone https://github.com/sillyghost/AYAv2.git
 
 RUN apt-get -y install pkg-config
 
-WORKDIR /tmp/AYAv2-AYAv2
+WORKDIR /tmp/AYAv2
 RUN ./autogen.sh && \
     ./configure --disable-tests --disable-bench && \
     make -j5 && \

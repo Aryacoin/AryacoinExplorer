@@ -4,13 +4,19 @@ rpcuser=${RPC_USER}
 rpcpassword=${RPC_PASSWORD}
 
 rpcallowip=0.0.0.0/0
-rpcport=8332
+port=8332
+rpcport=8333
 
 gen=0
 
 keypool=100
 
 paytxfee=0.00100000
+
+listen=1
+server=1
+irc=1
+upnp=1
 
 staking=0
 txindex=1

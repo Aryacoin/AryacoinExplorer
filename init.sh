@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 print_style () {
 
     if [ "$2" == "info" ] ; then
