@@ -1,1 +1,1 @@
-* * * * * cd /explorer && rm -f tmp/index.pid && /usr/local/bin/node scripts/sync.js index update >> /index.log
+* * * * * cd /explorer && rm -f tmp/index.pid && /usr/local/bin/node scripts/sync.js index update > /index.log
