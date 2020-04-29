@@ -41,5 +41,5 @@ RUN chown 1000:1000 /home/aryacoin/aryacoin.conf
 USER aryacoin
 WORKDIR /home/aryacoin
 
-EXPOSE 8332
+EXPOSE 8332 8333
 CMD ["/entrypoint.sh"]
