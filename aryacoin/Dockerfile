@@ -23,7 +23,7 @@ RUN apt-get -y install \
 
 WORKDIR /tmp
 
-RUN git clone https://github.com/sillyghost/AYAv2.git
+RUN git clone https://github.com/Aryacoin/Aryacoin.git
 
 RUN apt-get -y install pkg-config
 
