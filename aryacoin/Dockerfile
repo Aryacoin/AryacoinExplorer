@@ -27,7 +27,7 @@ RUN git clone https://github.com/Aryacoin/Aryacoin.git
 
 RUN apt-get -y install pkg-config
 
-WORKDIR /tmp/AYAv2
+WORKDIR /tmp/Aryacoin
 RUN ./autogen.sh && \
     ./configure --disable-tests --disable-bench && \
     make -j5 && \
